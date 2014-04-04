@@ -10,6 +10,7 @@ import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
 import org.opencv.objdetect.CascadeClassifier;
 
+import tools.FSTool;
 import tools.SIFTTool;
 
 //
@@ -56,11 +57,11 @@ class DetectFaceDemo {
 
 public class Test {
   public static void main(String[] args) {
+	
     System.out.println("Hello, OpenCV");
-
-    // Load the native library.
-    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-    new DetectFaceDemo().run();
-    //new SIFTTool().Run("E:\\JavaCV\\MoshiDiana.jpg", "E:\\JavaCV\\Flash.jpg");
+    // This is required whenever using OpenCV
+    //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    //new DetectFaceDemo().run();
+    FSTool.createPojectFS("F:\\Project-13", "13");
   }
 }
