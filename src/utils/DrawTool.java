@@ -1,4 +1,4 @@
-package tools;
+package utils;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;

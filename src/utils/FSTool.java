@@ -1,4 +1,4 @@
-package tools;
+package utils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -7,6 +7,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+
+import org.apache.commons.io.FileUtils;
+
 
 public class FSTool {
 
@@ -51,6 +54,16 @@ public class FSTool {
 	public static boolean dirExists(String dir) {
 		Path path = FileSystems.getDefault().getPath(dir);
 		return Files.exists(path, LinkOption.NOFOLLOW_LINKS);
+	}
+	
+	public static boolean copyDir(String source, String target) {
+		try {
+		    FileUtils.copyDirectory(new File(source), new File(target));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		    return false;
+		}
+		return true;
 	}
 	
 	/*

@@ -1,4 +1,4 @@
-package tools;
+package utils;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -164,8 +164,8 @@ public class SIFTTool {
 		dumpStr = dumpStr.replaceAll(";", "\n");
 		
 		try {
-			PrintWriter fileWriter = new PrintWriter("img.sift");
-			fileWriter.print(fileName);
+			PrintWriter fileWriter = new PrintWriter(fileName);
+			fileWriter.print(dumpStr);
 			fileWriter.close();
 		} catch(FileNotFoundException exception) {
 			System.out.println("Could not write down the feature file");

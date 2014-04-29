@@ -1,5 +1,12 @@
 package test;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
@@ -9,59 +16,31 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
 import org.opencv.objdetect.CascadeClassifier;
+import org.yaml.snakeyaml.Yaml;
 
-import tools.FSTool;
-import tools.SIFTTool;
-
-//
-// Detects faces in an image, draws boxes around them, and writes the results
-// to "faceDetection.png".
-//
-class DetectFaceDemo {
-  public void run() {
-    System.out.println("\nRunning DetectFaceDemo");
-
-    // Create a face detector from the cascade file in the resources
-    // directory.
-    CascadeClassifier faceDetector = new CascadeClassifier("E:\\JavaCV\\haarcascade_frontalface_alt_tree.xml");
-    Mat image = Highgui.imread("E:\\JavaCV\\KarenNFer.jpg");
-    if( image == null ) {
-    	System.out.println("Could not load the file");
-    	System.exit(-1);
-    }
-
-    // Detect faces in the image.
-    // MatOfRect is a special container class for Rect.
-    MatOfRect faceDetections = new MatOfRect();
-    faceDetector.detectMultiScale(image, 
-    							faceDetections, 
-    							1.05, 
-    							1, 
-    							1, 
-    							new Size(10, 10), 
-    							new Size(512, 512));
-
-    System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
-
-    // Draw a bounding box around each face.
-    for (Rect rect : faceDetections.toArray()) {
-        Core.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0,0,255),3);
-    }
-
-    // Save the visualized detection.
-    String filename = "E:\\JavaCV\\faceDetect.jpg";
-    System.out.println(String.format("Writing %s", filename));
-    Highgui.imwrite(filename, image);
-  }
-}
+import utils.*;
 
 public class Test {
   public static void main(String[] args) {
 	
-    System.out.println("Hello, OpenCV");
+    //System.out.println("Hello, OpenCV");
     // This is required whenever using OpenCV
     //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    //SIFTTool imgTool = new SIFTTool();
+	//imgTool.extractFeatsToFile("E:\\Devel\\VideoPipelineTools\\Tux.jpg", "E:\\Devel\\VideoPipelineTools\\Tux.sift");
     //new DetectFaceDemo().run();
-    FSTool.createPojectFS("F:\\Project-13", "13");
+    //FSTool.createPojectFS("F:\\Project-13", "13");
+    
+    //FSTool.copyDir("F:\\Warez", "F:\\Test");
+	  
+	  Map<String, String> map = new HashMap<String, String>();
+	  map.put("name", "Pushkin");
+	  Yaml yaml = new Yaml();
+	  String output = yaml.dumpAsMap(map);
+	  System.out.println(output);
+	  Yaml inYaml = new Yaml();
+	  Map inMap = (HashMap<String, String>)inYaml.load(output);
+	  
+	  System.out.println("Break here");
   }
 }
