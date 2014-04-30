@@ -33,6 +33,8 @@ public class Test {
     
     //FSTool.copyDir("F:\\Warez", "F:\\Test");
 	  
+	  
+	  //YAML example
 	  Map<String, String> map = new HashMap<String, String>();
 	  map.put("name", "Pushkin");
 	  Yaml yaml = new Yaml();
