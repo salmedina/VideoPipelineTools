@@ -66,8 +66,8 @@ public class FSTool {
 		return true;
 	}
 	
-	/*
-	 * Creates all the folders required for the project
+	/**
+	 * Copies all the subfolders of source dir into the target Dir
 	 */
 	public static int cloneTreeStruct(String sourceDir, String targetDir) {
 		List<String> sourceList = getDirList(new File(sourceDir));
@@ -85,6 +85,11 @@ public class FSTool {
 		return targetList.size();
 	}
 	
+	/**
+	 * Gets a list of all the full path of subfolders of the given directory
+	 * @param node
+	 * @return
+	 */
 	public static List<String> getDirList(File node){
 		List dirList = new ArrayList<String>();
  
@@ -98,6 +103,12 @@ public class FSTool {
 		return dirList;
 	}
 	
+	/**
+	 * Auxiliary function for the recursive approach of getDirList 
+	 * @param node
+	 * @param dirList
+	 * @return
+	 */
 	public static List<String> getSubDirList(File node, List<String> dirList){
 		if(node.isDirectory()){
 			dirList.add(node.getAbsolutePath());
@@ -109,12 +120,17 @@ public class FSTool {
 		return dirList;
 	}
 	
+	/**
+	 * Prints a list of all the subdirectories of dir
+	 * @param dir
+	 * @return number of subfolders found in dir
+	 */
 	public static int printDirList(String dir) {
 		List<String> dirList = getDirList(new File(dir));
-		return printDirList(dirList);
+		return printStrList(dirList);
 	}
 	
-	public static int printDirList(List<String> dirList) {
+	public static int printStrList(List<String> dirList) {
 		if( dirList == null)
 			return 0;
 		
@@ -125,30 +141,47 @@ public class FSTool {
 		return dirList.size();
 	}
 	
-	/*
+	public static List<String> getFileList(File node){
+		List fileList = new ArrayList<String>();
+ 
+		if(node.isDirectory()){
+			String[] subNote = node.list();
+			for(String filename : subNote){
+				getSubFileList(new File(node, filename), fileList);
+			}
+		} else if(node.isFile()) {
+			fileList.add(node.getAbsolutePath());
+		}
+		return fileList;
+	}
+	
+	public static int getSubFileList(File node, List<String> fileList){
+		if(node.isDirectory()){
+			String[] subNote = node.list();
+			for(String filename : subNote){
+				getSubFileList(new File(node, filename), fileList);
+			}
+		} else if (node.isFile()) {
+			fileList.add(node.getAbsolutePath());
+		}
+		return fileList.size();
+	}
+	
+	/**
 	 * Gets the list of files with given extension
 	 * searches for the subdirectories
+	 * @param path
+	 * @param ext
+	 * @return
 	 */
-	public static String[] getFilesByExt(String path, String ext) {
-		GenericExtFilter filter = new GenericExtFilter(ext);
-		 
-		File dir = new File(path);
- 
-		if(dir.isDirectory()==false) {
-			System.out.println("Directory does not exists : " + path);
-			return null;
-		}
-		// list out all the file name and filter by the extension
-		String[] list = dir.list(filter);
- 
-		if (list.length == 0) {
-			return null;
-		}
-		for (String file : list) {
-			String temp = new StringBuffer(path).append(File.separator)
-					.append(file).toString();
+	public static List<String> getFilesByExt(String path, String ext) {
+		List<String> fileList = getFileList(new File(path));
+		List<String> resList = new ArrayList<String>();
+		for(String file : fileList) {
+			if(file.endsWith(ext))
+				resList.add(file);
 		}
 		
-		return list;
+		return resList;
 	}
 }

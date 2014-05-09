@@ -22,19 +22,29 @@ import utils.*;
 
 public class Test {
   public static void main(String[] args) {
-	
-    //System.out.println("Hello, OpenCV");
-    // This is required whenever using OpenCV
-    //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-    //SIFTTool imgTool = new SIFTTool();
-	//imgTool.extractFeatsToFile("E:\\Devel\\VideoPipelineTools\\Tux.jpg", "E:\\Devel\\VideoPipelineTools\\Tux.sift");
-    //new DetectFaceDemo().run();
-    //FSTool.createPojectFS("F:\\Project-13", "13");
-    
-    //FSTool.copyDir("F:\\Warez", "F:\\Test");
-	  
+
+	  FSToolTest();
 	  
 	  //YAML example
+	  //YAMLTest();
+  }
+  
+  private static void OpenCVTest() {
+	System.out.println("Hello, OpenCV");
+	// This is required whenever using OpenCV
+	System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	SIFTTool imgTool = new SIFTTool();
+	imgTool.extractFeatsToFile("E:\\Devel\\VideoPipelineTools\\Tux.jpg", "E:\\Devel\\VideoPipelineTools\\Tux.sift");
+	
+  }
+  
+  private static void FSToolTest() {
+	  //FSTool.createPojectFS("F:\\Project-13", "13");
+	  //FSTool.copyDir("F:\\Warez", "F:\\Test");
+	  FSTool.printStrList(FSTool.getFilesByExt("F:\\VIDEOS\\", ".mp4")); 
+  }
+  
+  private static void YAMLTest() {
 	  Map<String, String> map = new HashMap<String, String>();
 	  map.put("name", "Pushkin");
 	  Yaml yaml = new Yaml();
@@ -45,4 +55,6 @@ public class Test {
 	  
 	  System.out.println("Break here");
   }
+  
+  
 }

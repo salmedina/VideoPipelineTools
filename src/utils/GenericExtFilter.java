@@ -5,12 +5,12 @@ import java.io.FilenameFilter;
 
 //inner class, generic extension filter
 public class GenericExtFilter implements FilenameFilter {
-	private String ext;
+	private String extension;
 
 	public GenericExtFilter(String ext) {
-		this.ext = ext;
+		this.extension = ext;
 	}
 	public boolean accept(File dir, String name) {
-		return (name.endsWith(ext));
+		return (name.endsWith(extension));
 	}
 }
